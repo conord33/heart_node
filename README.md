@@ -96,5 +96,21 @@ ex: response
 }
 ```
 
+## Improvements
 
+* Error handling should be added to the API.  A class and middleware that handles the structure of errors
+would help clean up the API
+
+* Increase the fidelity of the tests by adding more checks.  Unit tests could be added as well to improve the
+speed of the tests and improve test coverage.
+
+* Optimizing the postgres data for the queries. I do not have much experience with postgres yet, but the response
+for the aggregate queries can obviously be improved. This could be done by setting up triggers in the database that 
+update a few aggregate tables taht reduce the number of rows that are traversed during the aggregate queries. 
+Another soluition would be to use some kind of map reduce type function that would allow some parallelism to take
+place while processing some of the queries.
+
+* A more robust model system should be used to handle the data out of postgres. It should handle the sql query 
+strings more elegantly and create a more concrete data contract for all of the response objects and DB objects 
+that are handled. The readability of the sql strings could also be improved and abstracted into a model paradigm.
 
