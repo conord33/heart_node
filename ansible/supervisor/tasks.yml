@@ -1,0 +1,34 @@
+---
+# Supervisor tasks
+
+- name: install common packages
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - python-setuptools
+    - git-core
+
+- name: install supervisor
+  action: easy_install name=supervisor
+
+- name: create supervisord config folder
+  action: file dest=/etc/supervisor/conf.d state=directory owner=root
+
+- name: create supervisord config folder
+  action: file dest=/var/log/supervisor state=directory
+
+- name: create supervisord config
+  action: template src=supervisor/templates/supervisord.conf dest=/etc/supervisord.conf
+
+- name: create supervisord init script
+  action: template src=supervisor/templates/supervisord.sh dest=/etc/init.d/supervisord mode=0755
+
+- name: start supervisord service and have it run during system startup
+  action: service name=supervisord state=started enabled=yes
+
+- name: write api.conf
+  action: template src=supervisor/templates/api.conf dest=/etc/supervisor/conf.d/{{app_name}}.conf
+  notify:
+    - restart app
+
+- name: start app
+  action: supervisorctl name={{app_name}} state=started

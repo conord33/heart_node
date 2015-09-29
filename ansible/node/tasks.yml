@@ -1,0 +1,19 @@
+---
+# Node.js Tasks
+
+- name: install curl
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - curl
+
+- name: update node PPA
+  shell: curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+
+- name: install node 0.12
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - nodejs
+
+- name: install modules
+  sudo: false
+  command: npm install --no-bin-links chdir={{webapps_dir}}/{{app_name}}

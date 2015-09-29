@@ -1,0 +1,21 @@
+{
+  "name": "heart_node",
+  "version": "1.0.0",
+  "description": "Node api for processing heart rate data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test"
+  },
+  "author": "Conor Dawson",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "pg": "^4.4.2"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "supertest": "^1.1.0"
+  }
+}
